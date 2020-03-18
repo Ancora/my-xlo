@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myxlo/screens/filter/filter_screen.dart';
 import 'package:myxlo/screens/home/widgets/bar_button.dart';
 
 class TopBar extends StatelessWidget {
@@ -33,7 +34,13 @@ class TopBar extends StatelessWidget {
                 ),
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => FilterScreen(),
+                ),
+              );
+            },
           ),
         ],
       ),
