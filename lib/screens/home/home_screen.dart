@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myxlo/blocs/home_bloc.dart';
 import 'package:myxlo/common/custom_drawer/custom_drawer.dart';
 import 'package:myxlo/screens/home/widgets/search_dialog.dart';
+import 'package:myxlo/screens/home/widgets/top_bar.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -82,6 +83,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       drawer: CustomDrawer(),
+      body: Column(
+        children: <Widget>[
+          TopBar(),
+        ],
+      ),
     );
   }
 }
