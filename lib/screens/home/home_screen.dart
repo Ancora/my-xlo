@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:myxlo/blocs/home_bloc.dart';
 import 'package:myxlo/common/custom_drawer/custom_drawer.dart';
 import 'package:myxlo/screens/home/widgets/search_dialog.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -8,6 +10,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  HomeBloc _homeBloc;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    final HomeBloc homeBloc = Provider.of<HomeBloc>(context);
+    if (homeBloc != _homeBloc) {
+      _homeBloc = homeBloc;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     _openSearch(String currentSearch) async {
@@ -15,18 +29,56 @@ class _HomeScreenState extends State<HomeScreen> {
         context: context,
         builder: (context) => SearchDialog(currentSearch: currentSearch),
       );
+      if (search != null) {
+        _homeBloc.setSearch(search);
+      }
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('My XLO'),
+        title: StreamBuilder<String>(
+          stream: _homeBloc.outSearch,
+          initialData: '',
+          builder: (context, snapshot) {
+            if (snapshot.data.isEmpty) {
+              return Container();
+            } else {
+              return GestureDetector(
+                onTap: () => _openSearch(snapshot.data),
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    return Container(
+                      child: Text(snapshot.data),
+                      width: constraints.biggest.width,
+                    );
+                  },
+                ),
+              );
+            }
+          },
+        ),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              _openSearch('');
+          StreamBuilder<String>(
+            stream: _homeBloc.outSearch,
+            initialData: '',
+            builder: (context, snapshot) {
+              if (snapshot.data.isEmpty) {
+                return IconButton(
+                  icon: Icon(Icons.search),
+                  onPressed: () {
+                    _openSearch('');
+                  },
+                );
+              } else {
+                return IconButton(
+                  icon: Icon(Icons.cancel),
+                  onPressed: () {
+                    _homeBloc.setSearch('');
+                  },
+                );
+              }
             },
-          )
+          ),
         ],
       ),
       drawer: CustomDrawer(),

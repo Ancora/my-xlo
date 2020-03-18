@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myxlo/blocs/drawer_bloc.dart';
+import 'package:myxlo/blocs/home_bloc.dart';
 import 'package:myxlo/screens/base/base_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -14,6 +15,10 @@ class MyApp extends StatelessWidget {
       providers: [
         Provider<DrawerBloc>(
           create: (_) => DrawerBloc(),
+          dispose: (context, value) => value.dispose(),
+        ),
+        Provider<HomeBloc>(
+          create: (_) => HomeBloc(),
           dispose: (context, value) => value.dispose(),
         ),
       ],
