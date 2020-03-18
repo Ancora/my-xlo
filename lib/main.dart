@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myxlo/screens/base_screen.dart';
+import 'package:myxlo/screens/base/base_screen.dart';
 
 void main() {
   runApp(MyApp());
