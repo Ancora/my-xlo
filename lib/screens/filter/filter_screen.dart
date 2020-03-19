@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myxlo/screens/filter/widgets/order_by_field.dart';
+import 'package:myxlo/screens/filter/widgets/price_range_field.dart';
 import 'package:myxlo/screens/filter/widgets/section_title.dart';
 import 'package:myxlo/models/filter.dart';
 
@@ -30,6 +31,7 @@ class _FilterScreenState extends State<FilterScreen> {
                   onSaved: (v) {},
                 ),
                 const SectionTitle(title: 'Preço (R\$)'),
+                PriceRangeField(),
                 const SectionTitle(title: 'Tipo de anunciante'),
               ],
             ),
