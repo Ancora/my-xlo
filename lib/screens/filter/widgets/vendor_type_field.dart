@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:myxlo/models/filter.dart';
 
-class OrderByField extends StatelessWidget {
-  final FormFieldSetter<OrderBy> onSaved;
-  final OrderBy initialValue;
+class VendorTypeField extends StatelessWidget {
+  final FormFieldSetter<int> onSaved;
+  final int initialValue;
 
-  OrderByField({this.onSaved, this.initialValue});
+  VendorTypeField({this.onSaved, this.initialValue});
 
   @override
   Widget build(BuildContext context) {
-    return FormField<OrderBy>(
+    return FormField<int>(
       initialValue: initialValue,
       onSaved: onSaved,
       builder: (state) {
@@ -17,27 +17,35 @@ class OrderByField extends StatelessWidget {
           children: <Widget>[
             GestureDetector(
               onTap: () {
-                state.didChange(OrderBy.DATE);
+                if (state.value & VENDOR_TYPE_PARTICULAR != 0) {
+                  if (state.value & VENDOR_TYPE_PROFESSIONAL != 0) {
+                    state.didChange(state.value & ~VENDOR_TYPE_PARTICULAR);
+                  } else {
+                    state.didChange(VENDOR_TYPE_PROFESSIONAL);
+                  }
+                } else {
+                  state.didChange(state.value | VENDOR_TYPE_PARTICULAR);
+                }
               },
               child: Container(
                 height: 50,
-                width: 80,
+                width: 120,
                 decoration: BoxDecoration(
                   border: Border.all(
-                    color: state.value == OrderBy.DATE
+                    color: state.value & VENDOR_TYPE_PARTICULAR != 0
                         ? Colors.transparent
                         : Colors.grey,
                   ),
                   borderRadius: const BorderRadius.all(Radius.circular(50)),
-                  color: state.value == OrderBy.DATE
+                  color: state.value & VENDOR_TYPE_PARTICULAR != 0
                       ? Colors.blue
                       : Colors.transparent,
                 ),
                 alignment: Alignment.center,
                 child: Text(
-                  'Data',
+                  'Particular',
                   style: TextStyle(
-                    color: state.value == OrderBy.DATE
+                    color: state.value & VENDOR_TYPE_PARTICULAR != 0
                         ? Colors.white
                         : Colors.blue,
                   ),
@@ -47,27 +55,35 @@ class OrderByField extends StatelessWidget {
             const SizedBox(width: 10),
             GestureDetector(
               onTap: () {
-                state.didChange(OrderBy.PRICE);
+                if (state.value & VENDOR_TYPE_PROFESSIONAL != 0) {
+                  if (state.value & VENDOR_TYPE_PARTICULAR != 0) {
+                    state.didChange(state.value & ~VENDOR_TYPE_PROFESSIONAL);
+                  } else {
+                    state.didChange(VENDOR_TYPE_PARTICULAR);
+                  }
+                } else {
+                  state.didChange(state.value | VENDOR_TYPE_PROFESSIONAL);
+                }
               },
               child: Container(
                 height: 50,
-                width: 80,
+                width: 120,
                 decoration: BoxDecoration(
                   border: Border.all(
-                    color: state.value == OrderBy.PRICE
+                    color: state.value & VENDOR_TYPE_PROFESSIONAL != 0
                         ? Colors.transparent
                         : Colors.grey,
                   ),
                   borderRadius: const BorderRadius.all(Radius.circular(50)),
-                  color: state.value == OrderBy.PRICE
+                  color: state.value & VENDOR_TYPE_PROFESSIONAL != 0
                       ? Colors.blue
                       : Colors.transparent,
                 ),
                 alignment: Alignment.center,
                 child: Text(
-                  'Preço',
+                  'Profissional',
                   style: TextStyle(
-                    color: state.value == OrderBy.PRICE
+                    color: state.value & VENDOR_TYPE_PROFESSIONAL != 0
                         ? Colors.white
                         : Colors.blue,
                   ),
