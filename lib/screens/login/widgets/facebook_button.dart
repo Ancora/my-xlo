@@ -1,45 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:myxlo/blocs/login/button_state.dart';
 import 'package:myxlo/blocs/login/login_bloc.dart';
+import 'package:myxlo/blocs/login/login_bloc_state.dart';
 
-class LoginButton extends StatelessWidget {
+class FacebookButton extends StatelessWidget {
   final LoginBloc loginBloc;
 
-  LoginButton(this.loginBloc);
+  FacebookButton(this.loginBloc);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 24),
+      margin: const EdgeInsets.symmetric(vertical: 16),
       height: 50,
-      child: StreamBuilder<ButtonState>(
-        stream: loginBloc.outLoginButton,
-        initialData: ButtonState(
-          enabled: false,
-          loading: false,
-        ),
+      child: StreamBuilder<LoginBlocState>(
+        initialData: LoginBlocState(LoginState.IDLE),
+        stream: loginBloc.outState,
         builder: (context, snapshot) {
           return RaisedButton(
-            color: Colors.green,
-            disabledColor: Colors.green.withAlpha(150),
             // elevation: 0,
+            color: Color.fromRGBO(58, 89, 152, 1),
+            disabledColor: Color.fromRGBO(58, 89, 152, 0.8),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(25),
             ),
-            onPressed: snapshot.data.enabled
-                ? () async {
-                    final bool success = await loginBloc.loginWithEmail();
+            onPressed: snapshot.data.state == LoginState.LOADING_FACE
+                ? null
+                : () async {
+                    final success = await loginBloc.loginWithFacebook();
                     if (success) {
                       Navigator.of(context).pop();
                     }
-                  }
-                : null,
-            child: snapshot.data.loading
+                  },
+            child: snapshot.data.state == LoginState.LOADING_FACE
                 ? CircularProgressIndicator(
                     valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                   )
                 : Text(
-                    'Entrar',
+                    'Entrar com Facebook',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
