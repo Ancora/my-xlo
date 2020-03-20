@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myxlo/blocs/login/field_state.dart';
 import 'package:myxlo/blocs/login/login_bloc.dart';
+import 'package:myxlo/screens/login/widgets/login_button.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -108,6 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   );
                 },
               ),
+              LoginButton(),
             ],
           ),
         ),
