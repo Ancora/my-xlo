@@ -45,6 +45,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               StreamBuilder<FieldState>(
+                stream: _loginBloc.outEmail,
+                initialData: FieldState(),
                 builder: (context, snapshot) {
                   return TextField(
                     keyboardType: TextInputType.emailAddress,
@@ -91,6 +93,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               StreamBuilder<FieldState>(
+                stream: _loginBloc.outPassword,
+                initialData: FieldState(),
                 builder: (context, snapshot) {
                   return TextField(
                     autocorrect: false,
