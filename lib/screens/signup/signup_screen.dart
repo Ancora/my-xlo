@@ -70,9 +70,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
             PasswordField(
               onSaved: (text) {},
             ),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 24),
+              height: 50,
+              child: RaisedButton(
+                color: Colors.green,
+                disabledColor: Colors.green.withAlpha(150),
+                //elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: Text(
+                  'Cadastre-se',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                onPressed: _signUp,
+              ),
+            ),
           ],
         ),
       ),
     );
+  }
+
+  void _signUp() {
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+    }
   }
 }
