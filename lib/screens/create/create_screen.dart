@@ -1,4 +1,6 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:myxlo/common/custom_drawer/custom_drawer.dart';
 import 'package:myxlo/screens/create/widgets/images_field.dart';
 
@@ -26,6 +28,76 @@ class _CreateScreenState extends State<CreateScreen> {
                 // salvar as imagens
               },
               initialValue: [],
+            ),
+            TextFormField(
+              decoration: InputDecoration(
+                labelText: 'Título *',
+                labelStyle: TextStyle(
+                  fontWeight: FontWeight.w800,
+                  color: Colors.blueGrey,
+                  fontSize: 18,
+                ),
+                contentPadding: const EdgeInsets.fromLTRB(16, 10, 12, 10),
+              ),
+              validator: (text) {
+                if (text.isEmpty) {
+                  return 'Campo obrigatório!';
+                } else {
+                  return null;
+                }
+              },
+              onSaved: (t) {},
+            ),
+            TextFormField(
+              maxLines: null,
+              decoration: InputDecoration(
+                labelText: 'Descrição *',
+                labelStyle: TextStyle(
+                  fontWeight: FontWeight.w800,
+                  color: Colors.blueGrey,
+                  fontSize: 18,
+                ),
+                contentPadding: const EdgeInsets.fromLTRB(16, 10, 12, 10),
+              ),
+              validator: (text) {
+                if (text.trim().isEmpty) {
+                  return 'Campo obrigatório!';
+                } else if (text.trim().length < 10) {
+                  return 'Descrição muito curta!';
+                } else {
+                  return null;
+                }
+              },
+              onSaved: (d) {},
+            ),
+            TextFormField(
+              decoration: InputDecoration(
+                labelText: 'Preço *',
+                labelStyle: TextStyle(
+                  fontWeight: FontWeight.w800,
+                  color: Colors.blueGrey,
+                  fontSize: 18,
+                ),
+                contentPadding: const EdgeInsets.fromLTRB(16, 10, 12, 10),
+              ),
+              keyboardType: const TextInputType.numberWithOptions(
+                decimal: true,
+                signed: false,
+              ),
+              inputFormatters: [
+                WhitelistingTextInputFormatter.digitsOnly,
+                RealInputFormatter(centavos: true),
+              ],
+              validator: (text) {
+                if (text.isEmpty) {
+                  return 'Campo obrigatório!';
+                } else if (double.tryParse(text) == null) {
+                  return 'Utilize valores válidos!';
+                } else {
+                  return null;
+                }
+              },
+              onSaved: (d) {},
             ),
             Container(
               height: 50,
