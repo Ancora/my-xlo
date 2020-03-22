@@ -2,10 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:myxlo/screens/create/widgets/image_source_sheet.dart';
 
 class ImagesField extends StatelessWidget {
+  final FormFieldSetter<List> onSaved;
+  final List initialValue;
+
+  ImagesField({this.onSaved, this.initialValue});
+
   @override
   Widget build(BuildContext context) {
     return FormField<List>(
-      initialValue: [],
+      initialValue: initialValue,
+      onSaved: onSaved,
+      validator: (images) {
+        if (images.isEmpty) {
+          return 'Imagem obrigatória!';
+        } else {
+          return null;
+        }
+      },
       builder: (state) {
         return Column(
           children: <Widget>[
@@ -90,6 +103,21 @@ class ImagesField extends StatelessWidget {
                 },
               ),
             ),
+            state.hasError
+                ? Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      state.errorText,
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  )
+                : Container()
           ],
         );
       },
