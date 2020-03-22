@@ -1,7 +1,5 @@
 class Address {
   String place;
-  //String number;
-  //String complement;
   String district;
   String city;
   String postalCode;
@@ -15,8 +13,6 @@ class Address {
 
   Address({
     this.place,
-    //this.number,
-    //this.complement,
     this.district,
     this.city,
     this.postalCode,

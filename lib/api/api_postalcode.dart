@@ -20,15 +20,12 @@ Future<ApiResponse> getAddressFromAPI(String postalCode) async {
     }
     final Address address = Address(
       place: response.data['logradouro'],
-      //number: response.data['número'],
-      //complement: response.data['complemento'],
       district: response.data['bairro'],
       city: response.data['localidade'],
       postalCode: response.data['cep'],
       federativeUnit: response.data['uf'],
     );
-    print(address);
-    //return ApiResponse.success(result: address);
+    return ApiResponse.success(result: address);
   } on DioError catch (e) {
     return ApiResponse.error(
       error: ApiError(

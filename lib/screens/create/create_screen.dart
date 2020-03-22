@@ -1,7 +1,10 @@
+import 'dart:html';
+
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:myxlo/api/api_postalcode.dart';
+import 'package:myxlo/common/cep_field.dart';
 import 'package:myxlo/common/custom_drawer/custom_drawer.dart';
 import 'package:myxlo/screens/create/widgets/images_field.dart';
 
@@ -70,6 +73,18 @@ class _CreateScreenState extends State<CreateScreen> {
                 }
               },
               onSaved: (d) {},
+            ),
+            CepField(
+              decoration: InputDecoration(
+                labelText: 'CEP *',
+                labelStyle: TextStyle(
+                  fontWeight: FontWeight.w800,
+                  color: Colors.blueGrey,
+                  fontSize: 18,
+                ),
+                contentPadding: const EdgeInsets.fromLTRB(16, 10, 12, 10),
+              ),
+              onSaved: (a) {},
             ),
             TextFormField(
               decoration: InputDecoration(
