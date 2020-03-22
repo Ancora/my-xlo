@@ -1,6 +1,7 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:myxlo/api/api_postalcode.dart';
 import 'package:myxlo/common/custom_drawer/custom_drawer.dart';
 import 'package:myxlo/screens/create/widgets/images_field.dart';
 
@@ -97,7 +98,7 @@ class _CreateScreenState extends State<CreateScreen> {
                   return null;
                 }
               },
-              onSaved: (d) {},
+              onSaved: (price) {},
             ),
             Container(
               height: 50,
@@ -112,6 +113,8 @@ class _CreateScreenState extends State<CreateScreen> {
                   ),
                 ),
                 onPressed: () {
+                  getAddressFromAPI('57.036-999');
+
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
                   }
