@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:myxlo/blocs/drawer_bloc.dart';
+import 'package:myxlo/screens/create/create_screen.dart';
 import 'package:myxlo/screens/home/home_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -47,7 +48,7 @@ class _BaseScreenState extends State<BaseScreen> {
         physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
           HomeScreen(),
-          Container(color: Colors.yellow),
+          CreateScreen(),
           Container(color: Colors.green),
           Container(color: Colors.grey),
           Container(color: Colors.blue),
