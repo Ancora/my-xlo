@@ -92,12 +92,16 @@ class _HomeScreenState extends State<HomeScreen> {
             child: StreamBuilder<List<Ad>>(
               stream: _homeBloc.outAd,
               builder: (context, snapshot) {
-                return ListView.builder(
-                  itemCount: snapshot.data.length,
-                  itemBuilder: (context, index) {
-                    return ProductTile(snapshot.data[index]);
-                  },
-                );
+                if (snapshot.data == null) {
+                  return Container();
+                } else {
+                  return ListView.builder(
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (context, index) {
+                      return ProductTile(snapshot.data[index]);
+                    },
+                  );
+                }
               },
             ),
           ),
