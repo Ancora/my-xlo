@@ -1,6 +1,7 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:myxlo/models/ad.dart';
+import 'package:myxlo/screens/product/widgets/main_panel.dart';
 
 class ProductScreen extends StatelessWidget {
   final Ad ad;
@@ -28,6 +29,21 @@ class ProductScreen extends StatelessWidget {
               dotBgColor: Colors.transparent,
               dotColor: Colors.blue,
               autoplay: false,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                MainPanel(ad),
+                /* Divider(),
+                DescricptionPanel(ad),
+                Divider(),
+                LocationPanel(ad),
+                Divider(),
+                UserPanel(), */
+              ],
             ),
           ),
         ],

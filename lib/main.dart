@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:myxlo/blocs/drawer_bloc.dart';
 import 'package:myxlo/blocs/home_bloc.dart';
 import 'package:myxlo/screens/base/base_screen.dart';
@@ -28,6 +29,13 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        supportedLocales: [
+          Locale('pt', 'BR'),
+        ],
         home: BaseScreen(),
       ),
     );
