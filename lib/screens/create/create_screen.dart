@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 //import 'package:myxlo/api/api_postalcode.dart';
 import 'package:myxlo/common/cep_field.dart';
 import 'package:myxlo/common/custom_drawer/custom_drawer.dart';
+import 'package:myxlo/screens/create/widgets/hide_phone_widget.dart';
 import 'package:myxlo/screens/create/widgets/images_field.dart';
 
 class CreateScreen extends StatefulWidget {
@@ -114,6 +115,10 @@ class _CreateScreenState extends State<CreateScreen> {
                 }
               },
               onSaved: (price) {},
+            ),
+            HidePhoneWidget(
+              onSaved: (h) {},
+              initialValue: false,
             ),
             Container(
               height: 50,
