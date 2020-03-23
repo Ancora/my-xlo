@@ -1,7 +1,7 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:myxlo/api/api_postalcode.dart';
+//import 'package:myxlo/api/api_postalcode.dart';
 import 'package:myxlo/common/cep_field.dart';
 import 'package:myxlo/common/custom_drawer/custom_drawer.dart';
 import 'package:myxlo/screens/create/widgets/images_field.dart';
@@ -82,7 +82,9 @@ class _CreateScreenState extends State<CreateScreen> {
                 ),
                 contentPadding: const EdgeInsets.fromLTRB(16, 10, 12, 10),
               ),
-              onSaved: (a) {},
+              onSaved: (a) {
+                print(a);
+              },
             ),
             TextFormField(
               decoration: InputDecoration(
@@ -126,8 +128,6 @@ class _CreateScreenState extends State<CreateScreen> {
                   ),
                 ),
                 onPressed: () {
-                  getAddressFromAPI('57.036-810');
-
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
                   }
