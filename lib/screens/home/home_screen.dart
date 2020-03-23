@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myxlo/blocs/home_bloc.dart';
 import 'package:myxlo/common/custom_drawer/custom_drawer.dart';
 import 'package:myxlo/models/ad.dart';
+import 'package:myxlo/screens/home/widgets/product_tile.dart';
 import 'package:myxlo/screens/home/widgets/search_dialog.dart';
 import 'package:myxlo/screens/home/widgets/top_bar.dart';
 import 'package:provider/provider.dart';
@@ -94,9 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return ListView.builder(
                   itemCount: snapshot.data.length,
                   itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(snapshot.data[index].title),
-                    );
+                    return ProductTile(snapshot.data[index]);
                   },
                 );
               },
