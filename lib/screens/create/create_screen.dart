@@ -1,9 +1,10 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-//import 'package:myxlo/api/api_postalcode.dart';
+import 'package:myxlo/api/api_postalcode.dart';
 import 'package:myxlo/common/cep_field.dart';
 import 'package:myxlo/common/custom_drawer/custom_drawer.dart';
+import 'package:myxlo/models/ad.dart';
 import 'package:myxlo/screens/create/widgets/hide_phone_widget.dart';
 import 'package:myxlo/screens/create/widgets/images_field.dart';
 
@@ -14,6 +15,8 @@ class CreateScreen extends StatefulWidget {
 
 class _CreateScreenState extends State<CreateScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  Ad ad = Ad();
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,7 @@ class _CreateScreenState extends State<CreateScreen> {
           children: <Widget>[
             ImagesField(
               onSaved: (images) {
-                // salvar as imagens
+                ad.images = images;
               },
               initialValue: [],
             ),
@@ -49,7 +52,9 @@ class _CreateScreenState extends State<CreateScreen> {
                   return null;
                 }
               },
-              onSaved: (t) {},
+              onSaved: (t) {
+                ad.title = t;
+              },
             ),
             TextFormField(
               maxLines: null,
@@ -71,7 +76,9 @@ class _CreateScreenState extends State<CreateScreen> {
                   return null;
                 }
               },
-              onSaved: (d) {},
+              onSaved: (d) {
+                ad.description = d;
+              },
             ),
             CepField(
               decoration: InputDecoration(
@@ -84,7 +91,7 @@ class _CreateScreenState extends State<CreateScreen> {
                 contentPadding: const EdgeInsets.fromLTRB(16, 10, 12, 10),
               ),
               onSaved: (a) {
-                print(a);
+                ad.address = a;
               },
             ),
             TextFormField(
@@ -114,10 +121,14 @@ class _CreateScreenState extends State<CreateScreen> {
                   return null;
                 }
               },
-              onSaved: (price) {},
+              onSaved: (p) {
+                ad.price = int.parse(getSanitizedText(p)) / 100;
+              },
             ),
             HidePhoneWidget(
-              onSaved: (h) {},
+              onSaved: (h) {
+                ad.hidePhone = h;
+              },
               initialValue: false,
             ),
             Container(
@@ -135,6 +146,8 @@ class _CreateScreenState extends State<CreateScreen> {
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
+                    // teste
+                    print(ad);
                   }
                 },
               ),
