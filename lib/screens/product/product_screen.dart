@@ -1,0 +1,37 @@
+import 'package:carousel_pro/carousel_pro.dart';
+import 'package:flutter/material.dart';
+import 'package:myxlo/models/ad.dart';
+
+class ProductScreen extends StatelessWidget {
+  final Ad ad;
+
+  ProductScreen(this.ad);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Anúncio'),
+      ),
+      body: ListView(
+        children: <Widget>[
+          Container(
+            height: 280,
+            child: Carousel(
+              images: ad.images.map(
+                (f) {
+                  return FileImage(f);
+                },
+              ).toList(),
+              dotSize: 4,
+              dotSpacing: 15,
+              dotBgColor: Colors.transparent,
+              dotColor: Colors.blue,
+              autoplay: false,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
