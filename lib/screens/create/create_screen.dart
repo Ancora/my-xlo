@@ -1,12 +1,15 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:myxlo/api/api_postalcode.dart';
+import 'package:myxlo/blocs/create_bloc.dart';
+import 'package:myxlo/blocs/drawer_bloc.dart';
+//import 'package:myxlo/api/api_postalcode.dart';
 import 'package:myxlo/common/cep_field.dart';
 import 'package:myxlo/common/custom_drawer/custom_drawer.dart';
 import 'package:myxlo/models/ad.dart';
 import 'package:myxlo/screens/create/widgets/hide_phone_widget.dart';
 import 'package:myxlo/screens/create/widgets/images_field.dart';
+import 'package:provider/provider.dart';
 
 class CreateScreen extends StatefulWidget {
   @override
@@ -16,7 +19,21 @@ class CreateScreen extends StatefulWidget {
 class _CreateScreenState extends State<CreateScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  CreateBloc _createBloc;
+
   Ad ad = Ad();
+
+  @override
+  void initState() {
+    super.initState();
+    _createBloc = CreateBloc();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _createBloc?.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -143,11 +160,15 @@ class _CreateScreenState extends State<CreateScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
-                    // teste
-                    print(ad);
+
+                    final bool success = await _createBloc.saveAd(ad);
+
+                    if (success) {
+                      Provider.of<DrawerBloc>(context).setPage(0);
+                    }
                   }
                 },
               ),
