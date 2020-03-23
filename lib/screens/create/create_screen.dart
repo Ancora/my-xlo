@@ -107,7 +107,7 @@ class _CreateScreenState extends State<CreateScreen> {
               validator: (text) {
                 if (text.isEmpty) {
                   return 'Campo obrigatório!';
-                } else if (double.tryParse(text) == null) {
+                } else if (int.tryParse(getSanitizedText(text)) == null) {
                   return 'Utilize valores válidos!';
                 } else {
                   return null;
@@ -138,5 +138,9 @@ class _CreateScreenState extends State<CreateScreen> {
         ),
       ),
     );
+  }
+
+  String getSanitizedText(String text) {
+    return text.replaceAll(RegExp(r'[^\d]'), '');
   }
 }
