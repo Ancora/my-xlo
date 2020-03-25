@@ -2,7 +2,9 @@ import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:myxlo/models/ad.dart';
 import 'package:myxlo/screens/product/widgets/description_panel.dart';
+import 'package:myxlo/screens/product/widgets/location_panel.dart';
 import 'package:myxlo/screens/product/widgets/main_panel.dart';
+import 'package:myxlo/screens/product/widgets/user_panel.dart';
 
 class ProductScreen extends StatelessWidget {
   final Ad ad;
@@ -41,9 +43,10 @@ class ProductScreen extends StatelessWidget {
                 Divider(),
                 DescriptionPanel(ad),
                 Divider(),
-                /* LocationPanel(ad),
+                LocationPanel(ad),
                 Divider(),
-                UserPanel(), */
+                UserPanel(ad),
+                //const SizedBox(height: 32),
               ],
             ),
           ),
