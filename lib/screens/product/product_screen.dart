@@ -1,6 +1,7 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:myxlo/models/ad.dart';
+import 'package:myxlo/screens/product/widgets/bottom_bar.dart';
 import 'package:myxlo/screens/product/widgets/description_panel.dart';
 import 'package:myxlo/screens/product/widgets/location_panel.dart';
 import 'package:myxlo/screens/product/widgets/main_panel.dart';
@@ -17,39 +18,44 @@ class ProductScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Anúncio'),
       ),
-      body: ListView(
+      body: Stack(
         children: <Widget>[
-          Container(
-            height: 280,
-            child: Carousel(
-              images: ad.images.map(
-                (f) {
-                  return FileImage(f);
-                },
-              ).toList(),
-              dotSize: 4,
-              dotSpacing: 15,
-              dotBgColor: Colors.transparent,
-              dotColor: Colors.blue,
-              autoplay: false,
-            ),
+          ListView(
+            children: <Widget>[
+              Container(
+                height: 280,
+                child: Carousel(
+                  images: ad.images.map(
+                    (f) {
+                      return FileImage(f);
+                    },
+                  ).toList(),
+                  dotSize: 4,
+                  dotSpacing: 15,
+                  dotBgColor: Colors.transparent,
+                  dotColor: Colors.blue,
+                  autoplay: false,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    MainPanel(ad),
+                    Divider(),
+                    DescriptionPanel(ad),
+                    Divider(),
+                    LocationPanel(ad),
+                    Divider(),
+                    UserPanel(ad),
+                    const SizedBox(height: 132),
+                  ],
+                ),
+              ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                MainPanel(ad),
-                Divider(),
-                DescriptionPanel(ad),
-                Divider(),
-                LocationPanel(ad),
-                Divider(),
-                UserPanel(ad),
-                //const SizedBox(height: 32),
-              ],
-            ),
-          ),
+          BottomBar(ad),
         ],
       ),
     );
