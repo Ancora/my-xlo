@@ -103,7 +103,22 @@ class ImagesField extends StatelessWidget {
                 },
               ),
             ),
-            state.hasError
+            if (state.hasError)
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  state.errorText,
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+
+            /* state.hasError
                 ? Container(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -117,7 +132,7 @@ class ImagesField extends StatelessWidget {
                       ),
                     ),
                   )
-                : Container()
+                : Container() */
           ],
         );
       },
