@@ -5,6 +5,7 @@ import 'package:myxlo/blocs/drawer_bloc.dart';
 import 'package:myxlo/screens/create/create_screen.dart';
 import 'package:myxlo/screens/home/home_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:myxlo/screens/account/account_screen.dart';
 
 class BaseScreen extends StatefulWidget {
   @override
@@ -51,7 +52,7 @@ class _BaseScreenState extends State<BaseScreen> {
           CreateScreen(),
           Container(color: Colors.green),
           Container(color: Colors.grey),
-          Container(color: Colors.blue),
+          AccountScreen(),
         ],
       ),
     );
